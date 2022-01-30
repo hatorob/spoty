@@ -14,12 +14,17 @@ export class ArtistaComponent implements OnInit {
 
   artista: any = {};
   loading: boolean;
+
+  topTracks: any = [];
+
   constructor( private router: ActivatedRoute,
                 private spotify: SpotifyService ) { 
     this.loading = true;
     this.router.params.subscribe( params =>  {
       //console.log(params);
       this.getArtista( params['id'] );
+      this.getTopTracks( params['id'] );
+
     })
   }
 
@@ -32,6 +37,14 @@ export class ArtistaComponent implements OnInit {
           this.loading = false;
     });
 
+  } 
+
+  getTopTracks( id:string ) {
+    this.spotify.getTopTracks( id )
+        .subscribe( topTracks => {
+          console.log(topTracks);
+          this.topTracks = topTracks;
+        })
   }
 
   ngOnInit(): void {

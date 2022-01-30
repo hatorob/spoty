@@ -17,7 +17,7 @@ export class SpotifyService {
 
     const url = `https://api.spotify.com/v1/${ query }`;
 
-    let token = "BQCvuOeqbsXITAn5Iap1Iru0Gx4rtqNfMrkm2lpAmYKVluS1q9Zmi6d6QqRDddodTahAuNHHYH6sEyrJCoY";
+    let token = "BQBDYIooAJ9d8-mqg3HuRMNzMA4HBHqmCgqIqMbxUN9qN1x2cpe6S76p5q6i7U67pYEyDh9I1dnt-QVQXZM";
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -56,6 +56,16 @@ export class SpotifyService {
     }); */
     return this.getQuery(`artists/${ id }`);
                 //.pipe( map( (data: any) => data['artists'].items)); No lo ocupamos
+        
+  
+              }
+  getTopTracks( id: string ) {
+    /* let token = "BQBeBLkxcco0ADzzlzjxEI-MWNttCJ6X7wRtgEHB2Mb38cIUY8t0zc3YTF9jgK_qHsHQWTZZg2ap0H1d8lY";
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    }); */
+    return this.getQuery(`artists/${ id }/top-tracks?market=us`)
+                .pipe( map( (data: any) => data['tracks'])); 
         
   }
 }
