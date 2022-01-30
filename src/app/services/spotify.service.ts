@@ -39,13 +39,23 @@ export class SpotifyService {
 
   }
 
-  getArtista( termino: string) {
+  getArtistas( termino: string) {
     /* let token = "BQBeBLkxcco0ADzzlzjxEI-MWNttCJ6X7wRtgEHB2Mb38cIUY8t0zc3YTF9jgK_qHsHQWTZZg2ap0H1d8lY";
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     }); */
     return this.getQuery(`search?q=${ termino }&type=artist&limit=15`)
                 .pipe( map( (data: any) => data['artists'].items));
+        
+  }
+
+  getArtista( id: string) {
+    /* let token = "BQBeBLkxcco0ADzzlzjxEI-MWNttCJ6X7wRtgEHB2Mb38cIUY8t0zc3YTF9jgK_qHsHQWTZZg2ap0H1d8lY";
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    }); */
+    return this.getQuery(`artists/${ id }`);
+                //.pipe( map( (data: any) => data['artists'].items)); No lo ocupamos
         
   }
 }
