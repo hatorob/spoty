@@ -14,9 +14,11 @@ import { HttpClientModule } from '@angular/common/http';
 // Importar rutas
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app-routing.module';
-import { NoimagePipe } from './pipes/noimage.pipe';
 import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
+//pipes
+import { NoimagePipe } from './pipes/noimage.pipe';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
 
 RouterModule
 
@@ -28,6 +30,7 @@ RouterModule
     ArtistaComponent,
     NavbarComponent,
     NoimagePipe,
+    DomseguroPipe,
     TarjetasComponent,
     LoadingComponent
   ],
