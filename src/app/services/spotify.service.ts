@@ -1,5 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+// Importamos el operador map, que nos permite hacer filtros en nuestras funciones "Solo trabajan con observables"
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,21 +14,27 @@ export class SpotifyService {
   }
 
   getNewReleases() {
-    let token = "BQCTx1GmcMcwwvMBEp_lSq5lhmlGs64195fJQR0phvR9qPfqLZT0gC3ZOjb1OMy6Y-RL0Rvp1fzuGdidIz0";
+    let token = "BQBeBLkxcco0ADzzlzjxEI-MWNttCJ6X7wRtgEHB2Mb38cIUY8t0zc3YTF9jgK_qHsHQWTZZg2ap0H1d8lY";
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get('https://api.spotify.com/v1/browse/new-releases', { headers } );
+    return this.http.get('https://api.spotify.com/v1/browse/new-releases', { headers } )
+                .pipe( map( (data: any ) => {
+                  return data['albums'].items;
+                }));
         
 
   }
 
   getArtista( termino: string) {
-    let token = "BQCTx1GmcMcwwvMBEp_lSq5lhmlGs64195fJQR0phvR9qPfqLZT0gC3ZOjb1OMy6Y-RL0Rvp1fzuGdidIz0";
+    let token = "BQBeBLkxcco0ADzzlzjxEI-MWNttCJ6X7wRtgEHB2Mb38cIUY8t0zc3YTF9jgK_qHsHQWTZZg2ap0H1d8lY";
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get(`https://api.spotify.com/v1/search?q=${ termino }&type=artist&limit=15`, { headers } );
+    return this.http.get(`https://api.spotify.com/v1/search?q=${ termino }&type=artist&limit=15`, { headers } )
+                    .pipe( map( (data: any) => {
+                      return data['artists'].items;
+                    }));
         
   }
 }
